@@ -6,7 +6,52 @@
 </div>
 
 
-## Incoming
+
+
+## Environment Setup
+
+conda create -n sa-mcq python=3.10
+conda activate sa-mcq
+pip install torch==2.3.0+cu121 --index-url https://download.pytorch.org/whl/cu121
+pip install -r requirements.txt
+
+
+## Eval
+
+Run evaluation with a vanilla model and an edited model:
+
+```bash
+python eval.py \
+  --vanilla_model Qwen/Qwen2.5-7B-Instruct \
+  --edited_model PUT_THE_EDITED_MODEL_HERE \
+  --data_path zsre_966.json \
+  --metrics exact_match_tf,exact_match_wo_tf,likelihood_margin,sa_mcq
+```
+
+Available metrics:
+
+```text
+exact_match_tf
+exact_match_wo_tf
+llm_as_judge
+likelihood_margin
+sa_mcq
+all
+```
+
+To run `LLM-as-judge`, provide an OpenAI-compatible API key:
+
+```bash
+python eval.py \
+  --vanilla_model Qwen/Qwen2.5-7B-Instruct \
+  --edited_model PUT_THE_EDITED_MODEL_HERE \
+  --metrics llm_as_judge \
+  --api_key YOUR_API_KEY \
+  --judge_workers 100
+```
+
+The output is saved to `eval_compare_results.json` by default. Use `--output_path` to change it.
+
 
 ## Contact
 
