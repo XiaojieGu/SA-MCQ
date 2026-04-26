@@ -10,10 +10,12 @@
 
 ## Environment Setup
 
-conda create -n sa-mcq python=3.10
-conda activate sa-mcq
+```bash
+conda create -n ultraedit python=3.10
+conda activate ultraedit
 pip install torch==2.3.0+cu121 --index-url https://download.pytorch.org/whl/cu121
 pip install -r requirements.txt
+```
 
 
 ## Eval
